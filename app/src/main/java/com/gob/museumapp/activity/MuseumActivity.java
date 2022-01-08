@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -51,14 +52,20 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
         rankListBtn.setOnClickListener(this);
         myPageBtn.setOnClickListener(this);
 
+
         // 怎么只能这样设置颜色
         museumBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         collectionBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         searchBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
 
         // 博物馆列表
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MuseumActivity.this, android.R.layout.simple_list_item_1, museums);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MuseumActivity.this, android.R.layout.simple_list_item_1, museums);
         museumList.setAdapter(adapter);
+
+        museumList.setOnItemClickListener((adapterView, view, i, l) -> {
+            String fruit = museums[i];
+            Toast.makeText(MuseumActivity.this, fruit, Toast.LENGTH_SHORT).show();
+        });
 
     }
 
@@ -74,6 +81,7 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.collection_btn:
                 Intent jumpToCollection = new Intent(MuseumActivity.this, CollectionActivity.class);
+
                 startActivity(jumpToCollection);
                 break;
             case R.id.search_btn:
