@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MuseumActivity">
-
+    tools:context=".activity.SearchActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,7 +21,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="博物馆列表"
-                android:textColor="@color/purple_200"
                 android:textSize="17sp"/>
 
             <Button
@@ -40,60 +37,55 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="搜索"
+                android:textColor="@color/purple_200"
                 android:textSize="17sp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ListView
-                android:id="@+id/museum_list"
-                android:layout_width="match_parent"
-                android:layout_height="620dp">
-
-            </ListView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/main_rgroupTabMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:layout_gravity="bottom">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/main_page_btn"
-                android:text="首页"
-                android:textSize="17sp"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/main_rgroupTabMenu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/teal_200"
-                android:background="@color/white"/>
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_gravity="bottom">
 
-            <Button
-                android:id="@+id/rank_list_btn"
-                android:text="排行榜"
-                android:textSize="17sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"/>
+                <Button
+                    android:id="@+id/main_page_btn"
+                    android:text="首页"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/teal_200"
+                    android:background="@color/white"/>
 
-            <Button
-                android:id="@+id/my_page_btn"
-                android:text="我的"
-                android:textSize="17sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"/>
+                <Button
+                    android:id="@+id/rank_list_btn"
+                    android:text="排行榜"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"/>
 
+                <Button
+                    android:id="@+id/my_page_btn"
+                    android:text="我的"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"/>
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

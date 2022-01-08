@@ -20,6 +20,9 @@ public class CollectionActivity extends Activity implements View.OnClickListener
     private Button collectionBtn = null;
     private Button searchBtn = null;
     private ListView collectionList = null;
+    private Button mainPageBtn = null;
+    private Button rankListBtn = null;
+    private Button myPageBtn = null;
 
     private String[] collections = {"Algorithm", "a考研", "dataMining", "gittest", "integrated-design", "Java程序设计", "LaTeX", "MachineLearning", "OOP", "毕设", "并行分布式计算", "测评", "大数据技术基础", "电路与电子技术", "非关系型数据库", "复试"};
 
@@ -35,15 +38,20 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         collectionBtn = findViewById(R.id.collection_btn);
         searchBtn = findViewById(R.id.search_btn);
         collectionList = findViewById(R.id.collection_list);
+        mainPageBtn = findViewById(R.id.main_page_btn);
+        rankListBtn = findViewById(R.id.rank_list_btn);
+        myPageBtn = findViewById(R.id.my_page_btn);
 
         museumBtn.setOnClickListener(this);
         collectionBtn.setOnClickListener(this);
         searchBtn.setOnClickListener(this);
+        mainPageBtn.setOnClickListener(this);
+        rankListBtn.setOnClickListener(this);
+        myPageBtn.setOnClickListener(this);
 
         // 设置颜色
         museumBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         collectionBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
-        collectionBtn.setTextColor(R.color.teal_200);
         searchBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
 
         // 藏品列表
@@ -56,6 +64,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         int viewId = view.getId();
         switch (viewId){
             case R.id.museum_btn:
+            case R.id.main_page_btn:
                 Intent jumpToMuseum = new Intent(CollectionActivity.this, MuseumActivity.class);
                 startActivity(jumpToMuseum);
                 break;
@@ -64,7 +73,16 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                 startActivity(jumpToCollection);
                 break;
             case R.id.search_btn:
-                Toast.makeText(CollectionActivity.this, "搜索 button clicked.", Toast.LENGTH_SHORT).show();
+                Intent jumpToSearch = new Intent(CollectionActivity.this, SearchActivity.class);
+                startActivity(jumpToSearch);
+                break;
+            case R.id.rank_list_btn:
+                Intent jumpToRankList = new Intent(CollectionActivity.this, RankListActivity.class);
+                startActivity(jumpToRankList);
+                break;
+            case R.id.my_page_btn:
+                Intent jumpToMyPage = new Intent(CollectionActivity.this, MyActivity.class);
+                startActivity(jumpToMyPage);
                 break;
         }
     }
