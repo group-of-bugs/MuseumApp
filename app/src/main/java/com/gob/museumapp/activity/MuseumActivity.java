@@ -121,7 +121,7 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
             @Override
             public void run(){
                 DBHelper helper = new DBHelper();
-                String sql = "select * from Museum where mus_id = 1101 or mus_id = 1107 or mus_id = 1111";
+                String sql = "select * from Museum";
                 helper.setSql(sql);
                 List<Map<String,Object>> rs = helper.executeQuery();
                 for(int i=0; i<rs.size(); i++){
@@ -135,7 +135,7 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
                     museum.setRemark((String) m_data.get("mus_remark"));
                     museum.setMaster((String) m_data.get("mus_master"));
                     museum.setPhone((String) m_data.get("mus_phone"));
-                    museum.setGrade((Integer) m_data.get("mus_grade"));
+                    museum.setGrade((Double) m_data.get("mus_grade"));
                     Log.d("MuseumActivity", museum.getMuseumName() + " " + museum.getImgUrl());
                     data.add(museum);
                 }

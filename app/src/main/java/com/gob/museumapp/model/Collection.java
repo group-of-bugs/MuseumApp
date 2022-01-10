@@ -1,8 +1,8 @@
 package com.gob.museumapp.model;
 
 public class Collection {
-    private int colId;
-    private int musId;
+    private Double colId;
+    private Integer musId;
     private String colName;
     private String colEra;
     private String col_info;
@@ -10,19 +10,19 @@ public class Collection {
     private String imgUrl;
 
 
-    public int getColId() {
+    public Double getColId() {
         return colId;
     }
 
-    public void setColId(int colId) {
+    public void setColId(Double colId) {
         this.colId = colId;
     }
 
-    public int getMusId() {
+    public Integer getMusId() {
         return musId;
     }
 
-    public void setMusId(int musId) {
+    public void setMusId(Integer musId) {
         this.musId = musId;
     }
 

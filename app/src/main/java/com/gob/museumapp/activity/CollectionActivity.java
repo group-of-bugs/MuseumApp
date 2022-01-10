@@ -115,7 +115,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                     collection.setColName((String) c_data.get("col_name"));
                     collection.setCol_info((String) c_data.get("col_info"));
                     collection.setColEra((String) c_data.get("col_era"));
-                    collection.setColId((Integer) c_data.get("col_id"));
+                    collection.setColId((Double) c_data.get("col_id"));
                     collection.setMusId((Integer) c_data.get("mus_id"));
                     collection.setMusName((String) c_data.get("mus_name"));
                     Log.d("CollectionActivity", collection.getColName() + " " + collection.getImgUrl());

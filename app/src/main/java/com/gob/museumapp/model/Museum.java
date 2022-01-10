@@ -1,7 +1,6 @@
 package com.gob.museumapp.model;
 
-import java.sql.Time;
- // 博物馆类
+// 博物馆类
 public class Museum {
     private int mid;
     private String museumName;
@@ -14,7 +13,7 @@ public class Museum {
     private float score;
     private float flow;
     private String openTime;
-    private int grade;
+    private Double grade;
 
     public Museum(){
         this.mid = 0;
@@ -123,11 +122,11 @@ public class Museum {
         this.imgUrl = imgUrl;
     }
 
-    public int getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
  }
