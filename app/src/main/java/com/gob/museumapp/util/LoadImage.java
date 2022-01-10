@@ -86,7 +86,6 @@ public class LoadImage {
             }
             is.close();
             byte[] data =  outStream.toByteArray();
-            Log.d("LoadImage", data.toString());
             // 统一压缩到360P
             bm = getImageThumbnail(data, 480, 460);
         }

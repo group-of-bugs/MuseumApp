@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -126,8 +127,15 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
                 for(int i=0; i<rs.size(); i++){
                     Museum museum = new Museum();
                     Map<String,Object> m_data = rs.get(i);
+                    museum.setMid((Integer) m_data.get("mus_id"));
                     museum.setImgUrl((String) m_data.get("mus_picture"));
                     museum.setMuseumName((String) m_data.get("mus_name"));
+                    museum.setAddress((String) m_data.get("mus_address"));
+                    museum.setOpenTime((String) m_data.get("mus_time"));
+                    museum.setRemark((String) m_data.get("mus_remark"));
+                    museum.setMaster((String) m_data.get("mus_master"));
+                    museum.setPhone((String) m_data.get("mus_phone"));
+                    museum.setGrade((Integer) m_data.get("mus_grade"));
                     Log.d("MuseumActivity", museum.getMuseumName() + " " + museum.getImgUrl());
                     data.add(museum);
                 }

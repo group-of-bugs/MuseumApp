@@ -5,7 +5,6 @@ import java.sql.Time;
 public class Museum {
     private int mid;
     private String museumName;
-    private String info;
     private String imgUrl;
     private String address;
     private String remark;
@@ -14,28 +13,24 @@ public class Museum {
     private int rank;
     private float score;
     private float flow;
-    private Time closeTime;
-    private Time openTime;
+    private String openTime;
+    private int grade;
 
     public Museum(){
         this.mid = 0;
         this.museumName = null;
-        this.info = null;
         this.rank = 0;
         this.score = 0.0F;
         this.flow = 0.0F;
-        this.closeTime = null;
         this.openTime = null;
     }
 
-    public Museum(int mid, String museumName, String info, int rank, float score, float flow, Time closeTime, Time openTime){
+    public Museum(int mid, String museumName, int rank, float score, float flow, String openTime){
         this.mid = mid;
         this.museumName = museumName;
-        this.info = info;
         this.rank = rank;
         this.score = score;
         this.flow = flow;
-        this.closeTime = closeTime;
         this.openTime = openTime;
     }
 
@@ -55,13 +50,6 @@ public class Museum {
         this.museumName = museumName;
     }
 
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
 
     public int getRank() {
         return rank;
@@ -87,19 +75,11 @@ public class Museum {
         this.flow = flow;
     }
 
-    public Time getCloseTime() {
-        return closeTime;
-    }
-
-    public void setCloseTime(Time closeTime) {
-        this.closeTime = closeTime;
-    }
-
-    public Time getOpenTime() {
+    public String getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Time openTime) {
+    public void setOpenTime(String openTime) {
         this.openTime = openTime;
     }
 
@@ -141,5 +121,13 @@ public class Museum {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
  }
