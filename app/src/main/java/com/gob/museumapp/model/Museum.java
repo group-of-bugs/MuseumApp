@@ -6,6 +6,11 @@ public class Museum {
     private int mid;
     private String museumName;
     private String info;
+    private String imgUrl;
+    private String address;
+    private String remark;
+    private String phone;
+    private String master;
     private int rank;
     private float score;
     private float flow;
@@ -97,4 +102,44 @@ public class Museum {
     public void setOpenTime(Time openTime) {
         this.openTime = openTime;
     }
-}
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMaster() {
+        return master;
+    }
+
+    public void setMaster(String master) {
+        this.master = master;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+ }

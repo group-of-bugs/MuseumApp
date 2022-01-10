@@ -1,11 +1,17 @@
 package com.gob.museumapp.db;
+
 import java.io.*;
 import java.sql.*;
 import java.util.*;
+
 public class DBHelper {
+    private String driver_class = "com.mysql.jdbc.Driver";
+    private String driver_url = "jdbc:mysql://119.3.165.231:3306/museum?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private String database_usr = "root";
+    private String database_password = "123456";
     private String sql; // 要传入的sql语句
     private List sqlValues; // sql语句的参数
-    private Connection conn; // 连接对象
+    public Connection conn; // 连接对象
 
     public DBHelper(){ // 构造函数
         this.conn = getConnection();
@@ -27,12 +33,7 @@ public class DBHelper {
      * 获取数据库连接
      * @return
      */
-    private Connection getConnection(){
-        String driver_class = "com.mysql.jdbc.Driver";
-        String driver_url = "jdbc:mysql://linux123:3306/app?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-        String database_usr = "root";
-        String database_password = "12345678";
-
+    public Connection getConnection(){
         try {
             Class.forName(driver_class);
             conn = DriverManager.getConnection(driver_url, database_usr, database_password);
@@ -45,10 +46,10 @@ public class DBHelper {
     /**
      * 关闭所有连接
      * @param con
-     * @param pst
+     * @param st
      * @param rst
      */
-    private void closeAll(Connection con, PreparedStatement pst, ResultSet rst){
+    private void closeAll(Connection con, Statement st, ResultSet rst){
         if(rst != null){
             try{
                 rst.close();
@@ -57,9 +58,9 @@ public class DBHelper {
             }
         }
 
-        if(pst != null){
+        if(st != null){
             try{
-                pst.close();
+                st.close();
             } catch (SQLException e){
                 e.printStackTrace();
             }
@@ -80,19 +81,16 @@ public class DBHelper {
      */
     public List executeQuery(){
         ResultSet rst = null;
-        PreparedStatement pst = null;
+        Statement st = null;
         List result = null;
         try{
-            pst = conn.prepareStatement(sql);
-            if(sqlValues != null && sqlValues.size() > 0){
-                setSqlValues(pst, sqlValues);
-            }
-            rst = pst.executeQuery();
+            st = conn.createStatement();
+            rst = st.executeQuery(sql);
             result = ResultTransform(rst);
         } catch(SQLException e){
             e.printStackTrace();
         } finally{
-            this.closeAll(conn, pst, rst);
+            this.closeAll(conn, st, rst);
         }
         return result;
     }
@@ -134,7 +132,7 @@ public class DBHelper {
         }
     }
 
-    private List ResultTransform(ResultSet rst){
+    private List<Map<String,Object>> ResultTransform(ResultSet rst){
         List<Map<String,Object>>list=new ArrayList<Map<String,Object>>();
         try {
             ResultSetMetaData md = rst.getMetaData();

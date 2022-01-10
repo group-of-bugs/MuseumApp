@@ -48,7 +48,7 @@
             <ListView
                 android:id="@+id/collection_list"
                 android:layout_width="match_parent"
-                android:layout_height="620dp">
+                android:layout_height="550dp">
 
             </ListView>
         </LinearLayout>

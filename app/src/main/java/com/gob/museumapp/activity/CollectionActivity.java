@@ -4,16 +4,23 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import androidx.core.content.ContextCompat;
 
 import com.gob.museumapp.R;
+import com.gob.museumapp.db.DBHelper;
+import com.gob.museumapp.model.Collection;
+import com.gob.museumapp.model.CollectionAdapter;
+import com.gob.museumapp.model.Museum;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CollectionActivity extends Activity implements View.OnClickListener {
     private Button museumBtn = null;
@@ -24,7 +31,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
     private Button rankListBtn = null;
     private Button myPageBtn = null;
 
-    private String[] collections = {"Algorithm", "a考研", "dataMining", "gittest", "integrated-design", "Java程序设计", "LaTeX", "MachineLearning", "OOP", "毕设", "并行分布式计算", "测评", "大数据技术基础", "电路与电子技术", "非关系型数据库", "复试"};
+    private List<Collection> collections = new ArrayList<>();
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -32,7 +39,6 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); //隐藏系统标题栏
         setContentView(R.layout.activity_collection);
-
 
         museumBtn = findViewById(R.id.museum_btn);
         collectionBtn = findViewById(R.id.collection_btn);
@@ -55,7 +61,8 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         searchBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
 
         // 藏品列表
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CollectionActivity.this, android.R.layout.simple_list_item_1, collections);
+        initCollections();
+        ArrayAdapter<Collection> adapter = new CollectionAdapter(CollectionActivity.this, R.layout.collection_item, collections);
         collectionList.setAdapter(adapter);
     }
 
@@ -85,5 +92,40 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                 startActivity(jumpToMyPage);
                 break;
         }
+    }
+
+    private void initCollections(){
+        class DBThread extends Thread{
+            private List<Collection> data = new ArrayList<>();
+            public DBThread(){
+
+            }
+            @Override
+            public void run(){
+                DBHelper helper = new DBHelper();
+                String sql = "select * from Collection where mus_id = 1111 limit 50";
+                helper.setSql(sql);
+                List<Map<String,Object>> rs = helper.executeQuery();
+                for(int i=0; i<rs.size(); i++){
+                    Collection collection = new Collection();
+                    Map<String,Object> c_data = rs.get(i);
+                    collection.setImgUrl((String) c_data.get("col_picture"));
+                    collection.setColName((String) c_data.get("col_name"));
+                    Log.d("CollectionActivity", collection.getColName() + " " + collection.getImgUrl());
+                    data.add(collection);
+                }
+            }
+            public List<Collection> getData(){
+                return data;
+            }
+        }
+        DBThread dbThread = new DBThread();
+        dbThread.start();
+        try {
+            dbThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        collections = dbThread.getData();
     }
 }
