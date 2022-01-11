@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,6 +107,24 @@ public class SearchActivity extends Activity implements View.OnClickListener{
                 initCollections();
                 ArrayAdapter<Collection> adapter = new CollectionAdapter(SearchActivity.this, R.layout.collection_item, collections);
                 searchListView.setAdapter(adapter);
+                searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent jumpToCollectionDetail = new Intent(SearchActivity.this, CollectionDetailActivity.class);
+                        Collection detail = collections.get(position);
+                        Log.d("藏品主页",detail.getImgUrl());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("col_Name",detail.getColName());
+                        bundle.putString("col_Img",detail.getImgUrl());
+                        bundle.putString("col_Era",detail.getColEra());
+                        bundle.putString("col_Info",detail.getCol_info());
+                        bundle.putString("col_MusName",detail.getMusName());
+                        Log.d("藏品主页",detail.getImgUrl());
+                        jumpToCollectionDetail.putExtra("col_detail",bundle);
+                        startActivity(jumpToCollectionDetail);
+
+                    }
+                });
                 break;
         }
     }
@@ -113,6 +132,7 @@ public class SearchActivity extends Activity implements View.OnClickListener{
     public void initCollections(){
         String search_text = searchTextView.getText().toString();
         Log.d("SearchActivity", search_text);
+
         class DBThread extends Thread{
             private List<Collection> data = new ArrayList<>();
             public DBThread(){
@@ -138,11 +158,14 @@ public class SearchActivity extends Activity implements View.OnClickListener{
                     Log.d("CollectionActivity", collection.getColName() + " " + collection.getImgUrl());
                     data.add(collection);
                 }
+
             }
+
             public List<Collection> getData(){
                 return data;
             }
         }
+
         DBThread dbThread = new DBThread();
         dbThread.start();
         try {

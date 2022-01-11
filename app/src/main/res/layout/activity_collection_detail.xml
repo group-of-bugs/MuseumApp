@@ -9,27 +9,30 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:weightSum="10"
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="106dp">
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/collection_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_centerInParent="true"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/collection_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,11 +40,11 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:contentDescription="@android:string/autofill"
                     android:id="@+id/collection_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:contentDescription="@android:string/autofill" />
 
                 <TextView
                     android:id="@+id/collection_name"
@@ -49,21 +52,52 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/collection_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/collection_ComTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="23sp"
-                    android:text="@string/message"
                     android:layout_gravity="start"
-                    android:textStyle="bold"
-                    android:paddingTop="20dp"/>
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="@string/message"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/editComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_weight="12" />
+                    <Button
+                        android:id="@+id/commitBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@color/blue"
+                        android:text="@string/comment"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        />
+                </LinearLayout>
+                <ListView
+                    android:id="@+id/comment_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp">
+                </ListView>
+
             </LinearLayout>
         </ScrollView>
+
+
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
