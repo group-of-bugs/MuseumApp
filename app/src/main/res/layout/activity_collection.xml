@@ -11,7 +11,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
@@ -43,52 +44,59 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="10">
 
             <ListView
                 android:id="@+id/collection_list"
                 android:layout_width="match_parent"
-                android:layout_height="550dp">
+                android:layout_height="match_parent">
 
             </ListView>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/main_rgroupTabMenu"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:layout_alignParentBottom="true">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/main_page_btn"
-                android:text="首页"
-                android:textSize="17sp"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/main_rgroupTabMenu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/teal_200"
-                android:background="@color/white"/>
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_gravity="bottom">
 
-            <Button
-                android:id="@+id/rank_list_btn"
-                android:text="排行榜"
-                android:textSize="17sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"/>
+                <Button
+                    android:id="@+id/main_page_btn"
+                    android:text="首页"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/teal_200"
+                    android:background="@color/white"/>
 
-            <Button
-                android:id="@+id/my_page_btn"
-                android:text="我的"
-                android:textSize="17sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"/>
+                <Button
+                    android:id="@+id/rank_list_btn"
+                    android:text="排行榜"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"/>
 
+                <Button
+                    android:id="@+id/my_page_btn"
+                    android:text="我的"
+                    android:textSize="17sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"/>
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

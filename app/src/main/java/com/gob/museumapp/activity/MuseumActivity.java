@@ -14,8 +14,10 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
@@ -49,8 +51,6 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
 
     private List<Museum> museums = new ArrayList<>();
 
-    private Handler handler = new Handler();
-
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,11 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
         mainPageBtn.setOnClickListener(this);
         rankListBtn.setOnClickListener(this);
         myPageBtn.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         // 怎么只能这样设置颜色
         museumBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
@@ -136,7 +141,6 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
                     museum.setMaster((String) m_data.get("mus_master"));
                     museum.setPhone((String) m_data.get("mus_phone"));
                     museum.setGrade((Double) m_data.get("mus_grade"));
-                    Log.d("MuseumActivity", museum.getMuseumName() + " " + museum.getImgUrl());
                     data.add(museum);
                 }
             }

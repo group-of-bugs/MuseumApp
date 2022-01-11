@@ -7,12 +7,23 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.gob.museumapp.R;
+import com.gob.museumapp.db.DBHelper;
+import com.gob.museumapp.model.Collection;
+import com.gob.museumapp.model.CollectionAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class SearchActivity extends Activity implements View.OnClickListener{
 
@@ -22,6 +33,11 @@ public class SearchActivity extends Activity implements View.OnClickListener{
     private Button mainPageBtn = null;
     private Button rankListBtn = null;
     private Button myPageBtn = null;
+    private EditText searchTextView = null;
+    private ListView searchListView = null;
+    private Button searchConfirm = null;
+
+    private List<Collection> collections = new ArrayList<>();
 
     @SuppressLint("ResourceType")
     @Override
@@ -36,6 +52,9 @@ public class SearchActivity extends Activity implements View.OnClickListener{
         mainPageBtn = findViewById(R.id.main_page_btn);
         rankListBtn = findViewById(R.id.rank_list_btn);
         myPageBtn = findViewById(R.id.my_page_btn);
+        searchListView = findViewById(R.id.search_list);
+        searchConfirm = findViewById(R.id.search_confirm);
+        searchTextView = findViewById(R.id.search_text);
 
         museumBtn.setOnClickListener(this);
         collectionBtn.setOnClickListener(this);
@@ -43,11 +62,18 @@ public class SearchActivity extends Activity implements View.OnClickListener{
         mainPageBtn.setOnClickListener(this);
         rankListBtn.setOnClickListener(this);
         myPageBtn.setOnClickListener(this);
+        searchConfirm.setOnClickListener(this);
 
         museumBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         collectionBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         searchBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         searchBtn.setTextColor(R.color.teal_200);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
@@ -76,6 +102,54 @@ public class SearchActivity extends Activity implements View.OnClickListener{
                 Intent jumpToMyPage = new Intent(SearchActivity.this, MyActivity.class);
                 startActivity(jumpToMyPage);
                 break;
+            case R.id.search_confirm:
+                initCollections();
+                ArrayAdapter<Collection> adapter = new CollectionAdapter(SearchActivity.this, R.layout.collection_item, collections);
+                searchListView.setAdapter(adapter);
+                break;
         }
+    }
+
+    public void initCollections(){
+        String search_text = searchTextView.getText().toString();
+        Log.d("SearchActivity", search_text);
+        class DBThread extends Thread{
+            private List<Collection> data = new ArrayList<>();
+            public DBThread(){
+
+            }
+            @Override
+            public void run(){
+                DBHelper helper = new DBHelper();
+                String sql = "select * from Collection where col_name like '%" + search_text + "%'";
+                Log.d("SearchActivity", sql);
+                helper.setSql(sql);
+                List<Map<String,Object>> rs = helper.executeQuery();
+                for(int i=0; i<rs.size(); i++){
+                    Collection collection = new Collection();
+                    Map<String,Object> c_data = rs.get(i);
+                    collection.setImgUrl((String) c_data.get("col_picture"));
+                    collection.setColName((String) c_data.get("col_name"));
+                    collection.setCol_info((String) c_data.get("col_info"));
+                    collection.setColEra((String) c_data.get("col_era"));
+                    collection.setColId((Double) c_data.get("col_id"));
+                    collection.setMusId((Integer) c_data.get("mus_id"));
+                    collection.setMusName((String) c_data.get("mus_name"));
+                    Log.d("CollectionActivity", collection.getColName() + " " + collection.getImgUrl());
+                    data.add(collection);
+                }
+            }
+            public List<Collection> getData(){
+                return data;
+            }
+        }
+        DBThread dbThread = new DBThread();
+        dbThread.start();
+        try {
+            dbThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        collections = dbThread.getData();
     }
 }

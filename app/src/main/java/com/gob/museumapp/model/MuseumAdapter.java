@@ -40,7 +40,6 @@ public class MuseumAdapter extends ArrayAdapter<Museum> {
         TextView museumName = view.findViewById(R.id.museum_name);
         LoadImage loader = new LoadImage(museumImage);
         loader.setBitmap(museum.getImgUrl());
-        Log.d("MuseumAdapter", museum.getMuseumName());
         museumName.setText(museum.getMuseumName());
         return view;
     }
