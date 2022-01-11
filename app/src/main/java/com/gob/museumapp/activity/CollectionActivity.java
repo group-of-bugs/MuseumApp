@@ -65,7 +65,26 @@ public class CollectionActivity extends Activity implements View.OnClickListener
         initCollections();
         ArrayAdapter<Collection> adapter = new CollectionAdapter(CollectionActivity.this, R.layout.collection_item, collections);
         collectionList.setAdapter(adapter);
+        collectionList.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent jumpToCollectionDetail = new Intent(CollectionActivity.this, CollectionDetailActivity.class);
+                        Collection detail = collections.get(position);
+                        Log.d("藏品主页",detail.getImgUrl());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("col_Name",detail.getColName());
+                        bundle.putString("col_Img",detail.getImgUrl());
+                        bundle.putString("col_Era",detail.getColEra());
+                        bundle.putString("col_Info",detail.getCol_info());
+                        bundle.putString("col_MusName",detail.getMusName());
+                        Log.d("藏品主页",detail.getImgUrl());
+                        jumpToCollectionDetail.putExtra("col_detail",bundle);
+                        startActivity(jumpToCollectionDetail);
 
+                    }
+                }
+        );
     }
 
     @Override
