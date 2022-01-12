@@ -1,7 +1,5 @@
 package com.gob.museumapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +13,6 @@ import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
 import com.gob.museumapp.model.Collection;
 import com.gob.museumapp.model.RankCollectionAdapter;
-import com.gob.museumapp.model.Score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +80,7 @@ public class RankListActivity extends Activity implements View.OnClickListener{
                 startActivity(jumpToRankList);
                 break;
             case R.id.my_page_btn:
-                Intent jumpToMyPage = new Intent(RankListActivity.this, MyActivity.class);
+                Intent jumpToMyPage = new Intent(RankListActivity.this, MineActivity.class);
                 startActivity(jumpToMyPage);
                 break;
         }

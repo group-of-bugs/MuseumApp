@@ -17,7 +17,6 @@ import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
 import com.gob.museumapp.model.Collection;
 import com.gob.museumapp.model.CollectionAdapter;
-import com.gob.museumapp.model.Museum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +109,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
                 startActivity(jumpToRankList);
                 break;
             case R.id.my_page_btn:
-                Intent jumpToMyPage = new Intent(CollectionActivity.this, MyActivity.class);
+                Intent jumpToMyPage = new Intent(CollectionActivity.this, MineActivity.class);
                 startActivity(jumpToMyPage);
                 break;
         }
@@ -125,7 +124,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
             @Override
             public void run(){
                 DBHelper helper = new DBHelper();
-                String sql = "select * from Collection where mus_id = 1111 limit 50";
+                String sql = "select * from Collection where mus_id = 1101 limit 50";
                 helper.setSql(sql);
                 List<Map<String,Object>> rs = helper.executeQuery();
                 for(int i=0; i<rs.size(); i++){

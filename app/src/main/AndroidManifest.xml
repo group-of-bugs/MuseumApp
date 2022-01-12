@@ -25,19 +25,22 @@
             android:exported="false" />
         <activity
             android:name=".activity.MuseumDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.CollectionDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.SearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MyActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activity.MuseumActivity"
+            android:name=".activity.CollectionDetailActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.MineActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.LoginActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
@@ -52,6 +55,30 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".activity.RankListActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.MuseumActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.CollectorActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.MyCommentActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.SettingsActivity"
             android:exported="false"
             android:launchMode="singleTask" />
     </application>
