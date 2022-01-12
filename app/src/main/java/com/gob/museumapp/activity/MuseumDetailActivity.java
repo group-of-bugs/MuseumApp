@@ -39,6 +39,8 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
     private TextView museumName = null;
     private TextView museumAddress = null;
     private TextView museumTime = null;
+    private TextView museumUrl = null;
+    private TextView museumMaster = null;
     private Double Mus_id;
     private ListView museum_commentList = null;
     private Button museum_Comment = null;
@@ -67,14 +69,14 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
         museumName.setText(b.getString("mus_Name"));
         museumAddress = findViewById(R.id.museum_address);
         museumTime = findViewById(R.id.museum_time);
-        museumAddress.setText(b.getString("mus_Address"));
-        museumTime.setText(b.getString("mus_Time"));
+        museumUrl = findViewById(R.id.museum_url);
+        museumMaster = findViewById(R.id.museum_master);
+        museumUrl.setText("博物馆网址: " + b.getString("mus_Url"));
+        museumMaster.setText("博物馆馆长: " + b.getString("mus_Master"));
+        museumAddress.setText("博物馆地址: " + b.getString("mus_Address"));
+        museumTime.setText("开馆时间: " + b.getString("mus_Time"));
         museum_Comment = findViewById(R.id.museum_commitBtn);
         museum_Comment.setOnClickListener(this);
-        museum_ratingBar = findViewById(R.id.museum_ratingBar);
-        museum_ratingBar.setMax(5);
-        museum_rate = findViewById(R.id.museum_scoreBtn);
-        museum_rate.setOnClickListener(this);
         museum_newComment = findViewById(R.id.museum_editComment);
         Mus_id = b.getDouble("mus_Id");
         museum_commentList = findViewById(R.id.museum_comment_list);
@@ -105,31 +107,10 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
                 insertNewComment();
                 this.onResume();
                 break;
-            case R.id.museum_scoreBtn:
-                float rating = museum_ratingBar.getRating();
-                insertScore(rating);
-
         }
     }
 
-    private void insertScore(float rate){
-        class DBThread extends Thread {
-            private List<Comment> data = new ArrayList<>();
-            public DBThread() {
-            }
-            @Override
-            public void run() {
-                DBHelper helper = new DBHelper();
-//                String sql = "select * from Comment_museum where Mus_id = " + StrMus_id + " limit 50";
-                String sql = "insert into Score_museum(user_id,mus_id,score) values(" + user_id + "," + Mus_id + "," + rate + ")";
-                Log.d("rate" ,"rate");
-                helper.setSql(sql);
-                helper.executeUpdate();
-            }
-        }
-        DBThread thread = new DBThread();
-        thread.start();
-    }
+
 
     private void insertNewComment(){
         class DBThread extends Thread {

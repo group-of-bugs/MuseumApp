@@ -96,6 +96,7 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
                         Log.d("藏品主页",detail.getImgUrl());
                         Bundle bundle = new Bundle();
                         bundle.putDouble("mus_Id",detail.getMid());
+                        bundle.putString("mus_Url",detail.getRemark());
                         bundle.putString("mus_Name",detail.getMuseumName());
                         bundle.putString("mus_Img",detail.getImgUrl());
                         bundle.putString("mus_Time",detail.getOpenTime());

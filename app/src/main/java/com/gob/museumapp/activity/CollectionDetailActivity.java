@@ -38,6 +38,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
     private ImageView collectionImage = null;
     private TextView collectionName = null;
     private TextView collectionInfo = null;
+    private TextView collectionMus = null;
     private Double Col_id;
     private ListView commentList = null;
     private Button Comment = null;
@@ -63,9 +64,11 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         LoadImage loader = new LoadImage(collectionImage);
         loader.setBitmap(b.getString("col_Img"));
         collectionName = findViewById(R.id.collection_name);
-        collectionName.setText(b.getString("col_Name"));
+        collectionName.setText(b.getString("col_Name") + "  年代:" +b.getString("col_Era"));
         collectionInfo = findViewById(R.id.collection_info);
-        collectionInfo.setText(b.getString("col_Info"));
+        collectionInfo.setText("藏品详情: " + b.getString("col_Info"));
+        collectionMus = findViewById(R.id.collection_Mus);
+        collectionMus.setText("来自: " + b.getString("col_MusName"));
         Comment = findViewById(R.id.commitBtn);
         Comment.setOnClickListener(this);
         ratingBar = findViewById(R.id.ratingBar);
@@ -105,6 +108,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
             case R.id.scoreBtn:
                 float rating = ratingBar.getRating();
                 insertScore(rating);
+                break;
 
         }
     }
