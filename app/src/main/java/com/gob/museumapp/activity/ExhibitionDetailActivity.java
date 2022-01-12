@@ -31,6 +31,7 @@ public class ExhibitionDetailActivity extends Activity {
     private TextView exhibitionName = null;
     private TextView exhibitionInfo = null;
     private TextView exhibitionTime = null;
+    private TextView exhibitionMus = null;
     private Double Mus_id;
 
     @Override
@@ -52,6 +53,8 @@ public class ExhibitionDetailActivity extends Activity {
         exhibitionInfo.setText("展览详情: " + b.getString("exh_info"));
         exhibitionTime = findViewById(R.id.exhibition_time);
         exhibitionTime.setText("展览时间: " + b.getString("exh_time"));
+        exhibitionMus = findViewById(R.id.exhibition_Mus);
+        exhibitionMus.setText("展览博物馆: " + b.getString("mus_name"));
         Mus_id = b.getDouble("mus_Id");
 
 
