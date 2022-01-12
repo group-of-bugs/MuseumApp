@@ -124,7 +124,7 @@ public class CollectionActivity extends Activity implements View.OnClickListener
             @Override
             public void run(){
                 DBHelper helper = new DBHelper();
-                String sql = "select * from Collection where mus_id = 1107 limit 50";
+                String sql = "select * from Collection where mus_id = 1101 limit 50";
                 helper.setSql(sql);
                 List<Map<String,Object>> rs = helper.executeQuery();
                 for(int i=0; i<rs.size(); i++){
