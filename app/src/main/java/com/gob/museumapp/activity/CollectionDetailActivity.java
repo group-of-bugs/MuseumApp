@@ -4,6 +4,7 @@ package com.gob.museumapp.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -82,6 +83,9 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         newComment = findViewById(R.id.editComment);
         Col_id = b.getDouble("col_id");
         commentList = findViewById(R.id.comment_list);
+
+        SharedPreferences pref= getSharedPreferences("user_data",MODE_PRIVATE);
+        user_id = pref.getInt("id", 1);
 
         //评论详情
         initComments();

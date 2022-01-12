@@ -4,6 +4,7 @@ package com.gob.museumapp.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -86,6 +87,9 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
         Mus_id = b.getDouble("mus_Id");
         museum_commentList = findViewById(R.id.museum_comment_list);
 
+        SharedPreferences pref=getSharedPreferences("user_data",MODE_PRIVATE);
+        user_id = pref.getInt("id", 1);
+
         //评论详情
         initComments();
         ArrayAdapter<Comment> adapter = new CommentAdapter(MuseumDetailActivity.this, R.layout.comment_item, comments);
@@ -111,6 +115,7 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
                 Log.d("lyl", "Comment" + museum_newContent);
                 insertNewComment();
                 Toast.makeText(MuseumDetailActivity.this, "评论成功！", Toast.LENGTH_LONG).show();
+                museum_newComment.setText("");
                 this.onResume();
                 break;
             case R.id.museum_exhibition:
@@ -182,11 +187,13 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
         }
         DBThread dbThread = new DBThread();
         dbThread.start();
+
         try {
             dbThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         comments = dbThread.getData();
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -74,7 +75,8 @@ public class LoginActivity extends Activity implements View.OnClickListener
                         }
                         else
                         {
-                            Toast.makeText(LoginActivity.this,"account or password is invalid", Toast.LENGTH_LONG).show();
+                            Looper.prepare();
+                            Toast.makeText(LoginActivity.this,"account or password is wrong", Toast.LENGTH_LONG).show();
                         }
                     }
                 }).start();
