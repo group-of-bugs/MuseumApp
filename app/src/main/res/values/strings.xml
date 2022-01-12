@@ -13,4 +13,9 @@
     <string name="comment">评论</string>
     <string name="Score">打分</string>
     <string name="exhList">展览列表</string>
+    <string name="myComment">我的评论</string>
+    <string name="settings">Settings</string>
+    <string name="MyC">My Comment</string>
+    <string name="login">Login</string>
+    <string name="add_new_account">Add new account</string>
 </resources>

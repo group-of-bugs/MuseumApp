@@ -65,10 +65,10 @@
         android:layout_gravity="center">
         <Button
             android:id="@+id/login"
-            android:layout_width="220dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:text="Login"
+            android:text="@string/login"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:background="@color/blue"/>
@@ -78,7 +78,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:text="Add new account"
+            android:text="@string/add_new_account"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:background="@color/blue" />

@@ -36,16 +36,12 @@ public class MineActivity extends Activity implements View.OnClickListener{
         myPageBtn = findViewById(R.id.my_page_btn);
         img=findViewById(R.id.userimg);
         textview=findViewById(R.id.userid);
-        button1=findViewById(R.id.history);
-        button2=findViewById(R.id.favourite);
         button3=findViewById(R.id.comment);
         button4=findViewById(R.id.settings);
 
         mainPageBtn.setOnClickListener(this);
         rankListBtn.setOnClickListener(this);
         myPageBtn.setOnClickListener(this);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
 
