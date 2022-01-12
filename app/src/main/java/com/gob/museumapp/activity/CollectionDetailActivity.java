@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.gob.museumapp.R;
@@ -37,6 +38,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
     private TextView collectionTitle = null;
     private ImageView collectionImage = null;
     private TextView collectionName = null;
+    private TextView collectionEra = null;
     private TextView collectionInfo = null;
     private TextView collectionMus = null;
     private Double Col_id;
@@ -64,7 +66,9 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         LoadImage loader = new LoadImage(collectionImage);
         loader.setBitmap(b.getString("col_Img"));
         collectionName = findViewById(R.id.collection_name);
-        collectionName.setText(b.getString("col_Name") + "  年代:" +b.getString("col_Era"));
+        collectionName.setText(b.getString("col_Name"));
+        collectionEra = findViewById(R.id.collection_Era);
+        collectionEra.setText( "年代: " +b.getString("col_Era"));
         collectionInfo = findViewById(R.id.collection_info);
         collectionInfo.setText("藏品详情: " + b.getString("col_Info"));
         collectionMus = findViewById(R.id.collection_Mus);
@@ -83,10 +87,8 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         initComments();
         ArrayAdapter<Comment> adapter = new CommentAdapter(CollectionDetailActivity.this, R.layout.comment_item, comments);
         commentList.setAdapter(adapter);
-
-        //写入新评论
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -103,11 +105,13 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
                 newContent = newComment.getText().toString();//新评论内容
                 Log.d("lyl", "Comment" + newContent);
                 insertNewComment();
+                Toast.makeText(CollectionDetailActivity.this, "评论成功！", Toast.LENGTH_LONG).show();
                 this.onResume();
                 break;
             case R.id.scoreBtn:
                 float rating = ratingBar.getRating();
                 insertScore(rating);
+                Toast.makeText(CollectionDetailActivity.this, "打分成功！", Toast.LENGTH_LONG).show();
                 break;
 
         }

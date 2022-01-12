@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.gob.museumapp.R;
@@ -105,6 +106,7 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
                 museum_newContent = museum_newComment.getText().toString();//新评论内容
                 Log.d("lyl", "Comment" + museum_newContent);
                 insertNewComment();
+                Toast.makeText(MuseumDetailActivity.this, "评论成功！", Toast.LENGTH_LONG).show();
                 this.onResume();
                 break;
         }
