@@ -149,7 +149,7 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
             @Override
             public void run(){
                 DBHelper helper = new DBHelper();
-                String sql = "select * from Museum";
+                String sql = "select * from museum.Museum where mus_id = 1101 or mus_id = 1107 or mus_id = 1111";
                 helper.setSql(sql);
                 List<Map<String,Object>> rs = helper.executeQuery();
                 for(int i=0; i<rs.size(); i++){
