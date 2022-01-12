@@ -1,6 +1,5 @@
 package com.gob.museumapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
@@ -15,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
@@ -100,7 +98,7 @@ public class SearchActivity extends Activity implements View.OnClickListener{
                 startActivity(jumpToRankList);
                 break;
             case R.id.my_page_btn:
-                Intent jumpToMyPage = new Intent(SearchActivity.this, MyActivity.class);
+                Intent jumpToMyPage = new Intent(SearchActivity.this, MineActivity.class);
                 startActivity(jumpToMyPage);
                 break;
             case R.id.search_confirm:

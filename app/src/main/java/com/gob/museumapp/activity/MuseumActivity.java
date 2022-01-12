@@ -4,40 +4,23 @@ import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
-import com.gob.museumapp.model.Collection;
 import com.gob.museumapp.model.Museum;
 import com.gob.museumapp.model.MuseumAdapter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class MuseumActivity extends Activity implements View.OnClickListener{
 
@@ -134,7 +117,7 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
                 startActivity(jumpToRankList);
                 break;
             case R.id.my_page_btn:
-                Intent jumpToMyPage = new Intent(MuseumActivity.this, MyActivity.class);
+                Intent jumpToMyPage = new Intent(MuseumActivity.this, MineActivity.class);
                 startActivity(jumpToMyPage);
                 break;
         }
