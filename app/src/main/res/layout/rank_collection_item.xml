@@ -18,15 +18,13 @@
             android:id="@+id/collection_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/collection_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="平均得分: "
-            android:textSize="15dp"/>
+            android:textSize="17dp"/>
     </LinearLayout>
 
 </LinearLayout>
