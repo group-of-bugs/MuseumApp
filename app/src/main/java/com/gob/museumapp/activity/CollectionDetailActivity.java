@@ -64,6 +64,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         Col_id = b.getDouble("col_id");
         commentList = findViewById(R.id.comment_list);
 
+        Comment.setOnClickListener(this);
         //评论详情
         initComments();
         ArrayAdapter<Comment> adapter = new CommentAdapter(CollectionDetailActivity.this, R.layout.comment_item, comments);
@@ -71,6 +72,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
 
         //写入新评论
         newContent = newComment.getText().toString();//新评论内容
+        Log.d("CollectionDetailActivity", "Content: " + newContent);
     }
 
     @Override
@@ -78,6 +80,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         int viewId = view.getId();
         switch (viewId){
             case R.id.commitBtn:
+                newContent = newComment.getText().toString();//新评论内容
                 insertNewComment();
                 break;
         }
@@ -96,7 +99,8 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
                 DBHelper helper = new DBHelper();
                 String StrCol_id = String.valueOf(Col_id);
 //                String sql = "select * from Comment_Collection where col_id = " + StrCol_id + " limit 50";
-                String sql = "insert into Comment_Collection(user_id,col_id,content) values(" + user_id + "," + Col_id + "," + newContent+")";
+                String sql = "insert into Comment_Collection(user_id,col_id,content) values(" + user_id + "," + Col_id + "," + "'" + newContent + "'" + ")";
+                Log.d("CollectionDetailActivity", sql);
                 helper.setSql(sql);
                 helper.executeUpdate();
             }

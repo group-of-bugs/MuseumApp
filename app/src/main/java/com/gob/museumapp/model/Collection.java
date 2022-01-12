@@ -8,7 +8,7 @@ public class Collection {
     private String col_info;
     private String musName;
     private String imgUrl;
-
+    private Double colScore;
 
     public Double getColId() {
         return colId;
@@ -64,5 +64,13 @@ public class Collection {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Double getColScore() {
+        return colScore;
+    }
+
+    public void setColScore(Double colScore) {
+        this.colScore = colScore;
     }
 }
