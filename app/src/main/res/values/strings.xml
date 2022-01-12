@@ -12,4 +12,5 @@
     <string name="message">精选评论:</string>
     <string name="comment">评论</string>
     <string name="Score">打分</string>
+    <string name="exhList">展览列表</string>
 </resources>

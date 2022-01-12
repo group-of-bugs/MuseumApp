@@ -46,6 +46,7 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
     private ListView museum_commentList = null;
     private Button museum_Comment = null;
     private EditText museum_newComment = null;
+    private Button ExhList = null;
     private RatingBar museum_ratingBar = null;
     private Button museum_rate = null;
     private String museum_newContent;
@@ -78,6 +79,9 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
         museumTime.setText("开馆时间: " + b.getString("mus_Time"));
         museum_Comment = findViewById(R.id.museum_commitBtn);
         museum_Comment.setOnClickListener(this);
+        ExhList = findViewById(R.id.museum_exhibition);
+        ExhList.setOnClickListener(this);
+
         museum_newComment = findViewById(R.id.museum_editComment);
         Mus_id = b.getDouble("mus_Id");
         museum_commentList = findViewById(R.id.museum_comment_list);
@@ -108,6 +112,13 @@ public class MuseumDetailActivity extends Activity implements View.OnClickListen
                 insertNewComment();
                 Toast.makeText(MuseumDetailActivity.this, "评论成功！", Toast.LENGTH_LONG).show();
                 this.onResume();
+                break;
+            case R.id.museum_exhibition:
+                Intent jumpToExhList = new Intent(MuseumDetailActivity.this, ExhibitionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mus_Id",Mus_id.toString());
+                jumpToExhList.putExtra("ExhList",bundle);
+                startActivity(jumpToExhList);
                 break;
         }
     }

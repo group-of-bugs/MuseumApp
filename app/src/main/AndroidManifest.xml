@@ -18,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MuseumApp">
         <activity
+            android:name=".activity.ExhibitionDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ExhibitionActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MuseumDetailActivity"
             android:exported="false" />
         <activity
