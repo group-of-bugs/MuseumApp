@@ -2,9 +2,11 @@ package com.gob.museumapp.activity;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +38,13 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
     private ImageView collectionImage = null;
     private TextView collectionName = null;
     private TextView collectionInfo = null;
+    private TextView collectionMus = null;
     private Double Col_id;
     private ListView commentList = null;
     private Button Comment = null;
     private EditText newComment = null;
+    private RatingBar ratingBar = null;
+    private Button rate = null;
     private String newContent;
     private Integer user_id = 1;
 
@@ -50,16 +57,24 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         setContentView(R.layout.activity_collection_detail);
         Bundle b= this.getIntent().getBundleExtra("col_detail");
 
+
         collectionTitle = findViewById(R.id.collection_title);
         collectionTitle.setText("藏品详情");
         collectionImage = findViewById(R.id.collection_img);
         LoadImage loader = new LoadImage(collectionImage);
         loader.setBitmap(b.getString("col_Img"));
         collectionName = findViewById(R.id.collection_name);
-        collectionName.setText(b.getString("col_Name"));
+        collectionName.setText(b.getString("col_Name") + "  年代:" +b.getString("col_Era"));
         collectionInfo = findViewById(R.id.collection_info);
-        collectionInfo.setText(b.getString("col_Info"));
+        collectionInfo.setText("藏品详情: " + b.getString("col_Info"));
+        collectionMus = findViewById(R.id.collection_Mus);
+        collectionMus.setText("来自: " + b.getString("col_MusName"));
         Comment = findViewById(R.id.commitBtn);
+        Comment.setOnClickListener(this);
+        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar.setMax(5);
+        rate = findViewById(R.id.scoreBtn);
+        rate.setOnClickListener(this);
         newComment = findViewById(R.id.editComment);
         Col_id = b.getDouble("col_id");
         commentList = findViewById(R.id.comment_list);
@@ -73,6 +88,14 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         //写入新评论
         newContent = newComment.getText().toString();//新评论内容
         Log.d("CollectionDetailActivity", "Content: " + newContent);
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initComments();
+        ArrayAdapter<Comment> adapter = new CommentAdapter(CollectionDetailActivity.this, R.layout.comment_item, comments);
+        commentList.setAdapter(adapter);
     }
 
     @Override
@@ -81,9 +104,35 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         switch (viewId){
             case R.id.commitBtn:
                 newContent = newComment.getText().toString();//新评论内容
+                Log.d("lyl", "Comment" + newContent);
                 insertNewComment();
+                this.onResume();
                 break;
+            case R.id.scoreBtn:
+                float rating = ratingBar.getRating();
+                insertScore(rating);
+                break;
+
         }
+    }
+
+    private void insertScore(float rate){
+        class DBThread extends Thread {
+            private List<Comment> data = new ArrayList<>();
+            public DBThread() {
+            }
+            @Override
+            public void run() {
+                DBHelper helper = new DBHelper();
+//                String sql = "select * from Comment_Collection where col_id = " + StrCol_id + " limit 50";
+                String sql = "insert into Score_Collection(user_id,col_id,score) values(" + user_id + "," + Col_id + "," + rate + ")";
+                Log.d("rate" ,"rate");
+                helper.setSql(sql);
+                helper.executeUpdate();
+            }
+        }
+        DBThread thread = new DBThread();
+        thread.start();
     }
 
     private void insertNewComment(){
@@ -99,8 +148,8 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
                 DBHelper helper = new DBHelper();
                 String StrCol_id = String.valueOf(Col_id);
 //                String sql = "select * from Comment_Collection where col_id = " + StrCol_id + " limit 50";
-                String sql = "insert into Comment_Collection(user_id,col_id,content) values(" + user_id + "," + Col_id + "," + "'" + newContent + "'" + ")";
-                Log.d("CollectionDetailActivity", sql);
+                String sql = "insert into Comment_Collection(user_id,col_id,content) values(" + user_id + "," + Col_id + ",'" + newContent + "')";
+                Log.d("tag" , newContent + user_id.toString());
                 helper.setSql(sql);
                 helper.executeUpdate();
             }
@@ -131,7 +180,6 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
                     String _sql = "select user_name from User where user_id = " + comment.getUser_id();
                     _helper.setSql(_sql);
                     List<Map<String,Object>>_rs = _helper.executeQuery();
-                    Log.d("tag" , _rs.get(0).get("user_name").toString());
                     comment.setUser_name((String) _rs.get(0).get("user_name"));
                     comment.setContent((String) c_data.get("content"));
                     Log.d("CollectionActivity", comment.getCol_id() + " " + comment.getUser_id());
@@ -151,4 +199,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         }
         comments = dbThread.getData();
     }
+
+
 }
+
