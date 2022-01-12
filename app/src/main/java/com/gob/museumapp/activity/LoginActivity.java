@@ -23,6 +23,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
 {
     private EditText phoneEdit=null;
     private EditText passwordEdit=null;
+
     private Button login=null;
     private Button register=null;
     @Override

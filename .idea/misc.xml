@@ -5,7 +5,6 @@
       <map>
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/activity_collection.xml" value="0.25364583333333335" />
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/activity_collection_detail.xml" value="0.24954710144927536" />
-        <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/activity_exhibition_detail.xml" value="0.15677083333333333" />
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/activity_login2.xml" value="0.25364583333333335" />
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
@@ -27,6 +26,9 @@
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/rank_collection_item.xml" value="0.1" />
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/layout/test.xml" value="0.22291666666666668" />
         <entry key="..\:/Cling/my/integrated-design/MuseumApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26875" />
+        <entry key="..\:/Users/23597/Desktop/gittest/MuseumApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/23597/Desktop/gittest/MuseumApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Users/23597/Desktop/gittest/MuseumApp/app/src/main/res/layout/activity_my_comment.xml" value="0.25625" />
         <entry key="..\:/WynnLu/MuseumApp/app/src/main/res/layout/activity_collection.xml" value="0.1296875" />
         <entry key="..\:/WynnLu/MuseumApp/app/src/main/res/layout/activity_collection_detail.xml" value="0.142433234421365" />
         <entry key="..\:/WynnLu/MuseumApp/app/src/main/res/layout/activity_museum.xml" value="0.2" />
@@ -36,7 +38,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
