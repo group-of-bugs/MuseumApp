@@ -112,6 +112,7 @@ public class SearchActivity extends Activity implements View.OnClickListener{
                         Collection detail = collections.get(position);
                         Log.d("藏品主页",detail.getImgUrl());
                         Bundle bundle = new Bundle();
+                        bundle.putDouble("col_id",detail.getColId());
                         bundle.putString("col_Name",detail.getColName());
                         bundle.putString("col_Img",detail.getImgUrl());
                         bundle.putString("col_Era",detail.getColEra());
