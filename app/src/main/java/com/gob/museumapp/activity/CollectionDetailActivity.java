@@ -106,6 +106,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
                 Log.d("lyl", "Comment" + newContent);
                 insertNewComment();
                 Toast.makeText(CollectionDetailActivity.this, "评论成功！", Toast.LENGTH_LONG).show();
+                newComment.setText("");
                 this.onResume();
                 break;
             case R.id.scoreBtn:
@@ -157,6 +158,12 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
         }
         DBThread thread = new DBThread();
         thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     private void initComments(){
         class DBThread extends Thread{
