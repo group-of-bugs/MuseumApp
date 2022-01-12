@@ -20,7 +20,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/collection_title"
+                android:id="@+id/museum_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -40,27 +40,32 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:id="@+id/collection_img"
+                    android:id="@+id/museum_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:contentDescription="@android:string/autofill" />
 
                 <TextView
-                    android:id="@+id/collection_name"
+                    android:id="@+id/museum_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/collection_info"
+                    android:id="@+id/museum_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/museum_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/collection_ComTitle"
+                    android:id="@+id/museum_ComTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -76,14 +81,14 @@
                     android:paddingBottom="10dp">
 
                     <RatingBar
-                        android:id="@+id/ratingBar"
+                        android:id="@+id/museum_ratingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:rating="5"
                         android:layout_marginEnd="30dp"/>
 
                     <Button
-                        android:id="@+id/scoreBtn"
+                        android:id="@+id/museum_scoreBtn"
                         android:layout_width="129dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="0dp"
@@ -97,12 +102,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <EditText
-                        android:id="@+id/editComment"
+                        android:id="@+id/museum_editComment"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_weight="12" />
                     <Button
-                        android:id="@+id/commitBtn"
+                        android:id="@+id/museum_commitBtn"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -113,7 +118,7 @@
                         />
                 </LinearLayout>
                 <ListView
-                    android:id="@+id/comment_list"
+                    android:id="@+id/museum_comment_list"
                     android:layout_width="match_parent"
                     android:layout_height="500dp">
                 </ListView>

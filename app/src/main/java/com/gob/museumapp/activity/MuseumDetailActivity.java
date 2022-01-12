@@ -22,8 +22,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
-import com.gob.museumapp.model.Collection;
-import com.gob.museumapp.model.CollectionAdapter;
+import com.gob.museumapp.model.Museum;
+import com.gob.museumapp.model.MuseumAdapter;
 import com.gob.museumapp.model.Comment;
 import com.gob.museumapp.model.CommentAdapter;
 import com.gob.museumapp.util.LoadImage;
@@ -32,19 +32,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CollectionDetailActivity extends Activity implements View.OnClickListener{
+public class MuseumDetailActivity extends Activity implements View.OnClickListener{
 
-    private TextView collectionTitle = null;
-    private ImageView collectionImage = null;
-    private TextView collectionName = null;
-    private TextView collectionInfo = null;
-    private Double Col_id;
-    private ListView commentList = null;
-    private Button Comment = null;
-    private EditText newComment = null;
-    private RatingBar ratingBar = null;
-    private Button rate = null;
-    private String newContent;
+    private TextView museumTitle = null;
+    private ImageView museumImage = null;
+    private TextView museumName = null;
+    private TextView museumAddress = null;
+    private TextView museumTime = null;
+    private Double Mus_id;
+    private ListView museum_commentList = null;
+    private Button museum_Comment = null;
+    private EditText museum_newComment = null;
+    private RatingBar museum_ratingBar = null;
+    private Button museum_rate = null;
+    private String museum_newContent;
     private Integer user_id = 1;
 
     private List<Comment> comments = new ArrayList<>();
@@ -53,33 +54,35 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); //隐藏系统标题栏
-        setContentView(R.layout.activity_collection_detail);
-        Bundle b= this.getIntent().getBundleExtra("col_detail");
+        setContentView(R.layout.activity_museum_detail);
+        Bundle b= this.getIntent().getBundleExtra("mus_detail");
 
 
-        collectionTitle = findViewById(R.id.collection_title);
-        collectionTitle.setText("藏品详情");
-        collectionImage = findViewById(R.id.collection_img);
-        LoadImage loader = new LoadImage(collectionImage);
-        loader.setBitmap(b.getString("col_Img"));
-        collectionName = findViewById(R.id.collection_name);
-        collectionName.setText(b.getString("col_Name"));
-        collectionInfo = findViewById(R.id.collection_info);
-        collectionInfo.setText(b.getString("col_Info"));
-        Comment = findViewById(R.id.commitBtn);
-        Comment.setOnClickListener(this);
-        ratingBar = findViewById(R.id.ratingBar);
-        ratingBar.setMax(5);
-        rate = findViewById(R.id.scoreBtn);
-        rate.setOnClickListener(this);
-        newComment = findViewById(R.id.editComment);
-        Col_id = b.getDouble("col_id");
-        commentList = findViewById(R.id.comment_list);
+        museumTitle = findViewById(R.id.museum_title);
+        museumTitle.setText("博物馆详情");
+        museumImage = findViewById(R.id.museum_img);
+        LoadImage loader = new LoadImage(museumImage);
+        loader.setBitmap(b.getString("mus_Img"));
+        museumName = findViewById(R.id.museum_name);
+        museumName.setText(b.getString("mus_Name"));
+        museumAddress = findViewById(R.id.museum_address);
+        museumTime = findViewById(R.id.museum_time);
+        museumAddress.setText(b.getString("mus_Address"));
+        museumTime.setText(b.getString("mus_Time"));
+        museum_Comment = findViewById(R.id.museum_commitBtn);
+        museum_Comment.setOnClickListener(this);
+        museum_ratingBar = findViewById(R.id.museum_ratingBar);
+        museum_ratingBar.setMax(5);
+        museum_rate = findViewById(R.id.museum_scoreBtn);
+        museum_rate.setOnClickListener(this);
+        museum_newComment = findViewById(R.id.museum_editComment);
+        Mus_id = b.getDouble("mus_Id");
+        museum_commentList = findViewById(R.id.museum_comment_list);
 
         //评论详情
         initComments();
-        ArrayAdapter<Comment> adapter = new CommentAdapter(CollectionDetailActivity.this, R.layout.comment_item, comments);
-        commentList.setAdapter(adapter);
+        ArrayAdapter<Comment> adapter = new CommentAdapter(MuseumDetailActivity.this, R.layout.comment_item, comments);
+        museum_commentList.setAdapter(adapter);
 
         //写入新评论
 
@@ -88,22 +91,22 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         initComments();
-        ArrayAdapter<Comment> adapter = new CommentAdapter(CollectionDetailActivity.this, R.layout.comment_item, comments);
-        commentList.setAdapter(adapter);
+        ArrayAdapter<Comment> adapter = new CommentAdapter(MuseumDetailActivity.this, R.layout.comment_item, comments);
+        museum_commentList.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId){
-            case R.id.commitBtn:
-                newContent = newComment.getText().toString();//新评论内容
-                Log.d("lyl", "Comment" + newContent);
+            case R.id.museum_commitBtn:
+                museum_newContent = museum_newComment.getText().toString();//新评论内容
+                Log.d("lyl", "Comment" + museum_newContent);
                 insertNewComment();
                 this.onResume();
                 break;
-            case R.id.scoreBtn:
-                float rating = ratingBar.getRating();
+            case R.id.museum_scoreBtn:
+                float rating = museum_ratingBar.getRating();
                 insertScore(rating);
 
         }
@@ -117,8 +120,8 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
             @Override
             public void run() {
                 DBHelper helper = new DBHelper();
-//                String sql = "select * from Comment_Collection where col_id = " + StrCol_id + " limit 50";
-                String sql = "insert into Score_Collection(user_id,col_id,score) values(" + user_id + "," + Col_id + "," + rate + ")";
+//                String sql = "select * from Comment_museum where Mus_id = " + StrMus_id + " limit 50";
+                String sql = "insert into Score_museum(user_id,mus_id,score) values(" + user_id + "," + Mus_id + "," + rate + ")";
                 Log.d("rate" ,"rate");
                 helper.setSql(sql);
                 helper.executeUpdate();
@@ -139,10 +142,10 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
             @Override
             public void run() {
                 DBHelper helper = new DBHelper();
-                String StrCol_id = String.valueOf(Col_id);
-//                String sql = "select * from Comment_Collection where col_id = " + StrCol_id + " limit 50";
-                String sql = "insert into Comment_Collection(user_id,col_id,content) values(" + user_id + "," + Col_id + ",'" + newContent + "')";
-                Log.d("tag" , newContent + user_id.toString());
+                String StrMus_id = String.valueOf(Mus_id);
+//                String sql = "select * from Comment_museum where Mus_id = " + StrMus_id + " limit 50";
+                String sql = "insert into Comment_Museum(user_id,mus_id,content) values(" + user_id + "," + Mus_id + ",'" + museum_newContent + "')";
+                Log.d("tag" , museum_newContent + user_id.toString());
                 helper.setSql(sql);
                 helper.executeUpdate();
             }
@@ -159,14 +162,14 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
             @Override
             public void run(){
                 DBHelper helper = new DBHelper();
-                String StrCol_id = String.valueOf(Col_id);
-                String sql = "select * from Comment_Collection where col_id = " + StrCol_id + " limit 50";
+                String StrMus_id = String.valueOf(Mus_id);
+                String sql = "select * from Comment_Museum where Mus_id = " + StrMus_id + " limit 50";
                 helper.setSql(sql);
                 List<Map<String,Object>> rs = helper.executeQuery();
                 for(int i=0; i<rs.size(); i++){
                     Comment comment = new Comment();
                     Map<String,Object> c_data = rs.get(i);
-                    comment.setCol_id((Double) c_data.get("col_id"));
+                    comment.setCol_id((Double) c_data.get("Mus_id"));
                     comment.setCom_id((Integer) c_data.get("com_id"));
                     comment.setUser_id((Integer) c_data.get("user_id"));
                     DBHelper _helper = new DBHelper();
@@ -175,7 +178,7 @@ public class CollectionDetailActivity extends Activity implements View.OnClickLi
                     List<Map<String,Object>>_rs = _helper.executeQuery();
                     comment.setUser_name((String) _rs.get(0).get("user_name"));
                     comment.setContent((String) c_data.get("content"));
-                    Log.d("CollectionActivity", comment.getCol_id() + " " + comment.getUser_id());
+                    Log.d("museumActivity", comment.getCol_id() + " " + comment.getUser_id());
                     data.add(comment);
                 }
             }

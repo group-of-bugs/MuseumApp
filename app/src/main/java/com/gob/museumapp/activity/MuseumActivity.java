@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.gob.museumapp.R;
 import com.gob.museumapp.db.DBHelper;
+import com.gob.museumapp.model.Collection;
 import com.gob.museumapp.model.Museum;
 import com.gob.museumapp.model.MuseumAdapter;
 
@@ -86,6 +87,27 @@ public class MuseumActivity extends Activity implements View.OnClickListener{
         initMuseums();
         MuseumAdapter adapter = new MuseumAdapter(MuseumActivity.this, R.layout.museum_item, museums);
         museumListView.setAdapter(adapter);
+        museumListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent jumpToMuseumDetail = new Intent(MuseumActivity.this, MuseumDetailActivity.class);
+                        Museum detail = museums.get(position);
+                        Log.d("藏品主页",detail.getImgUrl());
+                        Bundle bundle = new Bundle();
+                        bundle.putDouble("mus_Id",detail.getMid());
+                        bundle.putString("mus_Name",detail.getMuseumName());
+                        bundle.putString("mus_Img",detail.getImgUrl());
+                        bundle.putString("mus_Time",detail.getOpenTime());
+                        bundle.putString("mus_Address",detail.getAddress());
+                        bundle.putString("mus_Phone",detail.getPhone());
+                        bundle.putString("mus_Master",detail.getMaster());
+                        jumpToMuseumDetail.putExtra("mus_detail",bundle);
+                        startActivity(jumpToMuseumDetail);
+
+                    }
+                }
+        );
     }
 
     @Override
